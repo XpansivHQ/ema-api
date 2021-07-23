@@ -1,22 +1,17 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://petstore.swagger.io/v2'
+  - url: 'http://ema.xpansiv.com/v1'
 info:
   description: >-
-    This is a sample server Petstore server. For this sample, you can use the api key
-    `special-key` to test the authorization filters.
+    This is EMA API documentation
   version: 1.0.0
-  title: OpenAPI Petstore
+  title: OpenAPI EMA
   license:
     name: Apache-2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 tags:
   - name: featureFlag
-    description: fa
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
+    description: feature flag
 paths:
   /feature-flags:
     get:
@@ -33,20 +28,36 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/FeatureFlag'
+  '/feature-flags/{name}':
+    get:
+      tags:
+       - featureFlag
+      description: Returns a single feature flag
+      operationId: getFeatureFlagByName
+      responses:
+       '200':
+         description: successful operation
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/FeatureFlag'
+      parameters:
+       - name: name
+         in: path
+         required: true
+         schema:
+           type: string
 externalDocs:
   description: Find out more about EMA
   url: 'https://xpansiv.com/'
 components:
   requestBodies:
-    Pet:
+    FeatureFlag:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Pet'
-      description: Pet object that needs to be added to the store
+            $ref: '#/components/schemas/FeatureFlag'
+      description: Change status of Feature Flag
       required: true
   schemas:
     FeatureFlag:
