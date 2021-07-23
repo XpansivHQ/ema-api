@@ -4,3 +4,4 @@
 
 [Documentation](api-docs/index.html)
 
+[Open API UI](/api-ui/index.html)
