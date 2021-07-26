@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package ema_admin.v1;
+
+option go_package = "github.com/xpansiv/ema_admin/v1";
+
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "EMA Admin";
+    version: "1.0.x";
+    contact: {
+      name: "Xpansiv Inc.";
+      url: "https://xpansiv.com/";
+      email: "kignatyev@xpansiv.com";
+    };
+    license: {
+      name: "BSD 3-Clause License";
+      url: "https://opensource.org/licenses/BSD-3-Clause";
+    };
+  };
+
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
+};
+
+service EMAAdminService {
+  rpc ListFeatureFlags(google.protobuf.Empty) returns (FeatureFlagsList) {
+    option (google.api.http) = {
+      get: "/api/v1/admin/feature-flags"
+    };
+  };
+  rpc GetFeatureFlag(google.protobuf.StringValue) returns (FeatureFlag) {
+    option (google.api.http) = {
+      get: "/api/v1/admin/feature-flags/{value}"
+    };
+  };
+}
+
+message FeatureFlag {
+  string id = 1;
+  bool enabled = 2;
+}
+
+message FeatureFlagsList {
+  repeated FeatureFlag items = 1;
+}
+
+message Error {
+  uint32 code = 1;
+  string message = 2;
+}

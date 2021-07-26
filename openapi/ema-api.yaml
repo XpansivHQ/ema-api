@@ -4,7 +4,7 @@ servers:
 info:
   description: >-
     This is EMA API documentation
-  version: 1.0.0
+  version: 1.0
   title: OpenAPI EMA
   license:
     name: Apache-2.0
