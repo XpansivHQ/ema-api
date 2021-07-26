@@ -1,0 +1,21 @@
+variables:
+  VERSION: $CI_PIPELINE_IID
+
+stages:
+  - publish
+
+before_script:
+  - mkdir -p "$MAVEN_DIRECTORY/repository"
+  - cp "$XPANSIV_MAVEN_SETTINGS" "$MAVEN_DIRECTORY/settings.xml"
+
+deploy:
+  stage: publish
+  only:
+    - non-existent-branch
+  script:
+    - . $HOME/set-env.sh
+    - echo "test $VERSION"
+
+
+
+
