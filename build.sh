@@ -2,8 +2,8 @@ IMAGE=xpansiv.jfrog.io/default-docker-virtual/api-tools:v1.1
 
 OPENAPI_OUT_DIR=openapi
 
-export VERSION=${1:-0}
-export FULL_VERSION=1.0.${VERSION}
+export REVISION=${1:-0}
+export FULL_VERSION=1.0.${REVISION}
 
 
 mkdir -p ${OPENAPI_OUT_DIR}
