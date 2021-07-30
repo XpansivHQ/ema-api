@@ -31,12 +31,29 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   produces: "application/json";
 };
 
+message SpringBean {
+  string name = 1;
+}
+
+message SpringBeansList {
+  repeated SpringBean items = 1;
+}
+
 service EMAAdminService {
+
+  rpc ListSpringBeans(google.protobuf.Empty) returns (SpringBeansList) {
+    option (google.api.http) = {
+      get: "/api/v1/admin/spring-beans"
+    };
+  };
+
+
   rpc ListFeatureFlags(google.protobuf.Empty) returns (FeatureFlagsList) {
     option (google.api.http) = {
       get: "/api/v1/admin/feature-flags"
     };
   };
+
   rpc GetFeatureFlag(google.protobuf.StringValue) returns (FeatureFlag) {
     option (google.api.http) = {
       get: "/api/v1/admin/feature-flags/{value}"
@@ -49,6 +66,7 @@ service EMAAdminService {
       body: "*"
     };
   }
+
 }
 
 message WorkflowsSearchCriteria {
