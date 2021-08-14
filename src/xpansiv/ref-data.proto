@@ -15,12 +15,8 @@ message AdministrativeArea1 {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       description: "This is aligned with google map API. see https://developers.google.com/maps/documentation/places/web-service/search-find-place"
+    }
 
-    }
-    external_docs: {
-      url: "https://developers.google.com/maps/documentation/places/web-service/search-find-place";
-      description: "Google Docs";
-    }
   };
   // for example US, CA
   string country_code = 1;

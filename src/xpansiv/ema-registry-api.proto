@@ -25,6 +25,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       name: "BSD 3-Clause License";
       url: "https://opensource.org/licenses/BSD-3-Clause";
     };
+    description: "see more https://xpansivhq.atlassian.net/wiki/spaces/AEM/pages/1872625715/Registries+API"
   };
 
   base_path: "/api/v1/registry";
@@ -98,20 +99,20 @@ service EMARegistryService {
 
   rpc ListAvailableRecPrograms(google.protobuf.Empty ) returns ( RecPrograms ){
     option (google.api.http) = {
-      get: "/api/v1/data/rec-program"
+      get: "/data/rec-program"
     };
   }
 
   rpc ImportRegistryData(RegistryImportData) returns (RegistryImportResult) {
     option (google.api.http) = {
-      post: "/api/v1/account/{account_id}/registry/import"
+      post: "/account/{account_id}/import"
       body: "*"
     };
   };
 
   rpc UpdateRegistry(RegistryExportData) returns (RegistryExportResult) {
     option (google.api.http) = {
-      post: "/api/v1/account/{account_id}/registry/export"
+      post: "/account/{account_id}/registry/export"
       body: "*"
     };
   };

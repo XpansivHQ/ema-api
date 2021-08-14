@@ -15,6 +15,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
     title: "EMA Admin";
     version: "1.0.x";
+    description: "see more https://xpansivhq.atlassian.net/wiki/spaces/AEM/pages/1872298014/EMA+Admin+API";
     contact: {
       name: "Xpansiv Inc.";
       url: "https://xpansiv.com/";
@@ -25,7 +26,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       url: "https://opensource.org/licenses/BSD-3-Clause";
     };
   };
-
+  base_path: "/api/v1/ema-admin";
   schemes: HTTPS;
   consumes: "application/json";
   produces: "application/json";
@@ -43,27 +44,27 @@ service EMAAdminService {
 
   rpc ListSpringBeans(google.protobuf.Empty) returns (SpringBeansList) {
     option (google.api.http) = {
-      get: "/api/v1/admin/spring-beans"
+      get: "/spring-beans"
     };
   };
 
 
   rpc ListFeatureFlags(google.protobuf.Empty) returns (FeatureFlagsList) {
     option (google.api.http) = {
-      get: "/api/v1/admin/feature-flags"
+      get: "/feature-flags"
     };
   };
 
   rpc SetFeatureFlag(FeatureFlag) returns (FeatureFlag) {
     option (google.api.http) = {
-      put: "/api/v1/admin/feature-flags/{id}"
+      put: "/feature-flags/{id}"
       body: "*"
     };
   };
 
   rpc ListWorkflows( WorkflowsSearchCriteria ) returns ( WorkflowsList ){
     option (google.api.http) = {
-      post: "/api/v1/admin/workflows/action/list"
+      post: "/workflows/action/list"
       body: "*"
     };
   }

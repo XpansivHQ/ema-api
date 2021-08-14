@@ -40,7 +40,12 @@
     window.onload = function() {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
-        url: "/ema-api/openapi/xpansiv/ema-admin-api.swagger.json",
+        urls:[
+          { name: "Admin (latest)", url: "/ema-api/openapi/xpansiv/ema-admin-api.swagger.json"},
+          { name: "Registry (latest)", url:  "/ema-api/openapi/xpansiv/ema-registry-api.swagger.json"},
+          { name: "Admin 1.0.3", url: "/ema-api/openapi/xpansiv/ema-admin-api.1.0.3.json"},
+          { name: "Admin 1.0.4", url: "/ema-api/openapi/xpansiv/ema-admin-api.1.0.4.json"}
+        ],
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
