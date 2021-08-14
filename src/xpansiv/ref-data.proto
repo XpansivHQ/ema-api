@@ -9,9 +9,10 @@ enum VintageType {
   VINTAGE_TYPE_YEAR_QUARTER = 1;
 }
 
+// aligned with Google MAP API
 message AdministrativeArea1 {
-  // for example US
+  // for example US, CA
   string country_code = 1;
-  // states for US, for example CA, CO, WA
+  // states for US or provinces for CA. Examples: CA, CO, WA for US; MB, SK for CA
   string code = 2;
 }
