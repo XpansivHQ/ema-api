@@ -1,13 +1,26 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "xpansiv/ema-registry-api.proto",
-    "version": "1.0.5"
+    "title": "Xpansiv Registry API",
+    "version": "1.0.5",
+    "contact": {
+      "name": "Xpansiv Inc.",
+      "url": "https://xpansiv.com/",
+      "email": "kignatyev@xpansiv.com"
+    },
+    "license": {
+      "name": "BSD 3-Clause License",
+      "url": "https://opensource.org/licenses/BSD-3-Clause"
+    }
   },
   "tags": [
     {
       "name": "EMARegistryService"
     }
+  ],
+  "basePath": "/api/v1/registry",
+  "schemes": [
+    "https"
   ],
   "consumes": [
     "application/json"

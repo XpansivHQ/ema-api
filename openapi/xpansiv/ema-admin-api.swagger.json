@@ -50,9 +50,9 @@
         ]
       }
     },
-    "/api/v1/admin/feature-flags/{value}": {
-      "get": {
-        "operationId": "EMAAdminService_GetFeatureFlag",
+    "/api/v1/admin/feature-flags/{id}": {
+      "put": {
+        "operationId": "EMAAdminService_SetFeatureFlag",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -69,11 +69,27 @@
         },
         "parameters": [
           {
-            "name": "value",
-            "description": "The string value.",
+            "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "name": {
+                  "type": "string",
+                  "title": "optional name"
+                }
+              }
+            }
           }
         ],
         "tags": [
@@ -103,7 +119,7 @@
         ]
       }
     },
-    "/api/v1/workflows/list": {
+    "/api/v1/admin/workflows/action/list": {
       "post": {
         "operationId": "EMAAdminService_ListWorkflows",
         "responses": {
@@ -182,6 +198,21 @@
         }
       }
     },
+    "ema_admin.v1.TimeRange": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "title": "inclusive"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "title": "inclusive"
+        }
+      }
+    },
     "ema_admin.v1.Workflow": {
       "type": "object",
       "properties": {
@@ -206,9 +237,18 @@
           "format": "date-time"
         },
         "wfStatus": {
-          "$ref": "#/definitions/ema_admin.v1.WorlflowStatus"
+          "$ref": "#/definitions/ema_admin.v1.WorkflowStatus"
         }
       }
+    },
+    "ema_admin.v1.WorkflowStatus": {
+      "type": "string",
+      "enum": [
+        "WF_STATUS_STARTED",
+        "WF_STATUS_FINISHED",
+        "WF_STATUS_FAILED"
+      ],
+      "default": "WF_STATUS_STARTED"
     },
     "ema_admin.v1.WorkflowsList": {
       "type": "object",
@@ -227,19 +267,13 @@
         "emaId": {
           "type": "string"
         },
-        "type": {
+        "workflowType": {
           "type": "string"
+        },
+        "startTimeLimits": {
+          "$ref": "#/definitions/ema_admin.v1.TimeRange"
         }
       }
-    },
-    "ema_admin.v1.WorlflowStatus": {
-      "type": "string",
-      "enum": [
-        "started",
-        "finished",
-        "failed"
-      ],
-      "default": "started"
     },
     "google.protobuf.Any": {
       "type": "object",

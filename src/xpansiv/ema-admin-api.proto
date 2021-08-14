@@ -54,40 +54,50 @@ service EMAAdminService {
     };
   };
 
-  rpc GetFeatureFlag(google.protobuf.StringValue) returns (FeatureFlag) {
+  rpc SetFeatureFlag(FeatureFlag) returns (FeatureFlag) {
     option (google.api.http) = {
-      get: "/api/v1/admin/feature-flags/{value}"
+      put: "/api/v1/admin/feature-flags/{id}"
+      body: "*"
     };
   };
 
   rpc ListWorkflows( WorkflowsSearchCriteria ) returns ( WorkflowsList ){
     option (google.api.http) = {
-      post: "/api/v1/workflows/list"
+      post: "/api/v1/admin/workflows/action/list"
       body: "*"
     };
   }
 
 }
 
-message WorkflowsSearchCriteria {
-  string emaId = 1;
-  string type = 2;
+message TimeRange {
+  //inclusive
+  google.protobuf.Timestamp start = 1;
+  //inclusive
+  google.protobuf.Timestamp end = 2;
 }
 
-enum WorlflowStatus {
-   started = 0;
-   finished = 1;
-   failed = 2;
+
+message WorkflowsSearchCriteria {
+  string ema_id = 1;
+  string workflow_type = 2;
+  TimeRange start_time_limits = 3;
+}
+
+enum WorkflowStatus {
+  WF_STATUS_STARTED = 0;
+  WF_STATUS_FINISHED = 1;
+  WF_STATUS_FAILED = 2;
 }
 
 message Workflow {
   string id = 1;
-  string runId = 2;
+  string run_id = 2;
   string type = 3;
   string _status = 4;
-  google.protobuf.Timestamp startTime = 5;
-  google.protobuf.Timestamp closingTime = 6;
-  WorlflowStatus wfStatus = 7;
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp closing_time = 6;
+  WorkflowStatus wf_status = 7;
 }
 
 message WorkflowsList {
