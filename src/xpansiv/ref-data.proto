@@ -3,14 +3,25 @@ syntax = "proto3";
 package eco_data.v1;
 
 option go_package = "github.com/xpansiv/eco_data";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 enum VintageType {
   VINTAGE_TYPE_YEAR_MONTH = 0;
   VINTAGE_TYPE_YEAR_QUARTER = 1;
 }
 
-// aligned with Google MAP API
+
 message AdministrativeArea1 {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      description: "This is aligned with google map API. see https://developers.google.com/maps/documentation/places/web-service/search-find-place"
+
+    }
+    external_docs: {
+      url: "https://developers.google.com/maps/documentation/places/web-service/search-find-place";
+      description: "Google Docs";
+    }
+  };
   // for example US, CA
   string country_code = 1;
   // states for US or provinces for CA. Examples: CA, CO, WA for US; MB, SK for CA

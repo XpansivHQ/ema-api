@@ -192,7 +192,11 @@
           "title": "states for US or provinces for CA. Examples: CA, CO, WA for US; MB, SK for CA"
         }
       },
-      "title": "aligned with Google MAP API"
+      "description": "This is aligned with google map API. see https://developers.google.com/maps/documentation/places/web-service/search-find-place",
+      "externalDocs": {
+        "description": "Google Docs",
+        "url": "https://developers.google.com/maps/documentation/places/web-service/search-find-place"
+      }
     },
     "ema_registry.v1.Account": {
       "type": "object",
