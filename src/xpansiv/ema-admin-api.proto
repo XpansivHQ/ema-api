@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package ema_admin.v1;
 
-option go_package = "github.com/xpansiv/ema_admin/v1";
+option go_package = "github.com/xpansiv/ema_admin";
 
 
 import "google/api/annotations.proto";
@@ -74,13 +74,20 @@ message WorkflowsSearchCriteria {
   string type = 2;
 }
 
+enum WorlflowStatus {
+   started = 0;
+   finished = 1;
+   failed = 2;
+}
+
 message Workflow {
   string id = 1;
   string runId = 2;
   string type = 3;
-  string status = 4;
+  string _status = 4;
   google.protobuf.Timestamp startTime = 5;
   google.protobuf.Timestamp closingTime = 6;
+  WorlflowStatus wfStatus = 7;
 }
 
 message WorkflowsList {

@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package ema_registry.v1;
+
+option go_package = "github.com/xpansiv/registry";
+
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "xpansiv/ref-data.proto";
+message OpResult {
+
+}
+
+message Account {
+  string id = 1;
+
+}
+
+
+message SubAccount {
+  Account account = 1;
+  string sub_account_id = 2;
+  eco_data.v1.AdministrativeArea1 retirement_location = 3;
+}
+
+message RecPosition {
+
+}
+
+message RecTransfer {
+
+}
+
+message TransferKey {
+
+}
+
+message RegistryImportData {
+  string account_id = 1;
+  repeated SubAccount sub_accounts = 2;
+  repeated RecTransfer transfers = 3;
+  repeated TransferKey known_transfer_keys = 4;
+  repeated RecPosition retired_positions = 5;
+  repeated RecPosition active_positions = 6;
+}
+
+message RegistryImportResult {
+
+}
+
+message RegistryExportData {
+  string account_id = 1;
+}
+
+message RegistryExportResult {
+
+}
+
+message RecProgram {
+  string code = 1;
+}
+
+message RecPrograms {
+  repeated RecProgram items = 1;
+}
+
+service EMARegistryService {
+
+  rpc addRecPrograms(RecProgram ) returns ( RecProgram );
+
+  rpc ListAvailableRecPrograms(google.protobuf.Empty ) returns ( RecPrograms ){
+    option (google.api.http) = {
+      get: "/api/v1/data/rec-program"
+    };
+  }
+
+  rpc ImportRegistryData(RegistryImportData) returns (RegistryImportResult) {
+    option (google.api.http) = {
+      post: "/api/v1/account/{account_id}/registry/import"
+      body: "*"
+    };
+  };
+
+  rpc UpdateRegistry(RegistryExportData) returns (RegistryExportResult) {
+    option (google.api.http) = {
+      post: "/api/v1/account/{account_id}/registry/export"
+      body: "*"
+    };
+  };
+
+}

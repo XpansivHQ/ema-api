@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package eco_data.v1;
+
+option go_package = "github.com/xpansiv/eco_data";
+
+enum VintageType {
+  VINTAGE_TYPE_YEAR_MONTH = 0;
+  VINTAGE_TYPE_YEAR_QUARTER = 1;
+}
+
+message AdministrativeArea1 {
+  // for example US
+  string country_code = 1;
+  // states for US, for example CA, CO, WA
+  string code = 2;
+}

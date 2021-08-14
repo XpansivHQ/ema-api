@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "xpansiv/ema-registry-api.proto",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "EMARegistryService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/account/{accountId}/registry/export": {
+      "post": {
+        "operationId": "EMARegistryService_UpdateRegistry",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ema_registry.v1.RegistryExportResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "EMARegistryService"
+        ]
+      }
+    },
+    "/api/v1/account/{accountId}/registry/import": {
+      "post": {
+        "operationId": "EMARegistryService_ImportRegistryData",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ema_registry.v1.RegistryImportResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subAccounts": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ema_registry.v1.SubAccount"
+                  }
+                },
+                "transfers": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ema_registry.v1.RecTransfer"
+                  }
+                },
+                "knownTransferKeys": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ema_registry.v1.TransferKey"
+                  }
+                },
+                "retiredPositions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ema_registry.v1.RecPosition"
+                  }
+                },
+                "activePositions": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ema_registry.v1.RecPosition"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "EMARegistryService"
+        ]
+      }
+    },
+    "/api/v1/data/rec-program": {
+      "get": {
+        "operationId": "EMARegistryService_ListAvailableRecPrograms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ema_registry.v1.RecPrograms"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "tags": [
+          "EMARegistryService"
+        ]
+      }
+    },
+    "/ema_registry.v1.EMARegistryService/addRecPrograms": {
+      "post": {
+        "operationId": "EMARegistryService_addRecPrograms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ema_registry.v1.RecProgram"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/google.rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ema_registry.v1.RecProgram"
+            }
+          }
+        ],
+        "tags": [
+          "EMARegistryService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "eco_data.v1.AdministrativeArea1": {
+      "type": "object",
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "title": "for example US"
+        },
+        "code": {
+          "type": "string",
+          "title": "states for US, for example CA, CO, WA"
+        }
+      }
+    },
+    "ema_registry.v1.Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ema_registry.v1.RecPosition": {
+      "type": "object"
+    },
+    "ema_registry.v1.RecProgram": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "ema_registry.v1.RecPrograms": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ema_registry.v1.RecProgram"
+          }
+        }
+      }
+    },
+    "ema_registry.v1.RecTransfer": {
+      "type": "object"
+    },
+    "ema_registry.v1.RegistryExportResult": {
+      "type": "object"
+    },
+    "ema_registry.v1.RegistryImportResult": {
+      "type": "object"
+    },
+    "ema_registry.v1.SubAccount": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/ema_registry.v1.Account"
+        },
+        "subAccountId": {
+          "type": "string"
+        },
+        "retirementLocation": {
+          "$ref": "#/definitions/eco_data.v1.AdministrativeArea1"
+        }
+      }
+    },
+    "ema_registry.v1.TransferKey": {
+      "type": "object"
+    },
+    "google.protobuf.Any": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "google.rpc.Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/google.protobuf.Any"
+          }
+        }
+      }
+    }
+  }
+}
