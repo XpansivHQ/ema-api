@@ -15,6 +15,7 @@ Make necessary changes to API and then
 
 Editing Specs.
 
-   To simplify coding, please configure IDE like this:
+   To simplify coding, please configure IDE like this: ![](docs/idea_conf.png)
 
-![docs/idea_conf.png]
+
+
