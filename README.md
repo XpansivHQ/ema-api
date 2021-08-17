@@ -15,7 +15,8 @@ Make necessary changes to API and then
 
 Editing Specs.
 
-   To simplify coding, please configure IDE like this: ![](docs/idea_conf.png)
+   To simplify coding, please checkout [API tools](https://gitlab.com/Xpansiv/api-tools) project and  configure IntelliJ IDE like this (adjusting paths):
+   ![](docs/idea_conf.png)
 
 
 
