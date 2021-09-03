@@ -117,4 +117,11 @@ service EMARegistryService {
     };
   };
 
+  rpc ListPositions(RegistryExportData) returns (RegistryExportResult) {
+    option (google.api.http) = {
+      post: "/account/{account_id}/portfolio"
+      body: "*"
+    };
+  };
+
 }

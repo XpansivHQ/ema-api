@@ -33,9 +33,11 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 message SpringBean {
-  string name = 1;
-}
+  string id = 1;
+  string class = 2;
+  repeated string interfaceNamesList = 3;
 
+}
 message SpringBeansList {
   repeated SpringBean items = 1;
 }
@@ -44,14 +46,16 @@ service EMAAdminService {
 
   rpc ListSpringBeans(google.protobuf.Empty) returns (SpringBeansList) {
     option (google.api.http) = {
-      get: "/spring-beans"
+      post: "/spring-beans"
+      body: "*"
     };
   };
 
 
   rpc ListFeatureFlags(google.protobuf.Empty) returns (FeatureFlagsList) {
     option (google.api.http) = {
-      get: "/feature-flags"
+      post: "/feature-flags"
+      body: "*"
     };
   };
 
@@ -64,7 +68,7 @@ service EMAAdminService {
 
   rpc ListWorkflows( WorkflowsSearchCriteria ) returns ( WorkflowsList ){
     option (google.api.http) = {
-      post: "/workflows/action/list"
+      post: "/workflows/action/find"
       body: "*"
     };
   }
@@ -120,3 +124,4 @@ message Error {
   uint32 code = 1;
   string message = 2;
 }
+
