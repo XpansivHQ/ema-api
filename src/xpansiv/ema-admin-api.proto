@@ -48,7 +48,7 @@ service EMAAdminService {
 
   rpc ListSpringBeans(google.protobuf.Empty) returns (SpringBeansList) {
     option (google.api.http) = {
-      post: "/spring-beans"
+      post: "/spring-beans/action/list"
       body: "*"
     };
   };
@@ -56,7 +56,7 @@ service EMAAdminService {
 
   rpc ListFeatureFlags(google.protobuf.Empty) returns (FeatureFlagsList) {
     option (google.api.http) = {
-      post: "/feature-flags"
+      post: "/feature-flags/action/list"
       body: "*"
     };
   };
@@ -70,7 +70,7 @@ service EMAAdminService {
 
   rpc ListWorkflows( WorkflowsSearchCriteria ) returns ( WorkflowsList ){
     option (google.api.http) = {
-      post: "/workflows/action/find"
+      post: "/workflows/action/list"
       body: "*"
     };
   }
