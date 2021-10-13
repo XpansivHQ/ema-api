@@ -38,6 +38,7 @@ message SpringBean {
   repeated string interfaceNamesList = 3;
   string cache_name = 4;
   int32 cache_size = 5;
+  string description = 6;
 
 }
 message SpringBeansList {
