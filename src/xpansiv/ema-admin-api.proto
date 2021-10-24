@@ -32,6 +32,19 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   produces: "application/json";
 };
 
+message ParameterInfo {
+  string name = 1;
+  string type = 2;
+  string description = 3;
+}
+
+message UIMethod {
+  string name = 1;
+  string return_type = 2;
+  string description = 3;
+  repeated ParameterInfo parameters = 4;
+}
+
 message SpringBean {
   string id = 1;
   string class = 2;
@@ -39,8 +52,10 @@ message SpringBean {
   string cache_name = 4;
   int32 cache_size = 5;
   string description = 6;
-
+  repeated UIMethod ui_methods = 7;
 }
+
+
 message SpringBeansList {
   repeated SpringBean items = 1;
 }
